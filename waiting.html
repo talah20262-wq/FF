@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>MHM | انتظار الموافقة</title>
+
+<link rel="stylesheet"
+href="assets/css/main.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+
+body{
+
+background:#050816;
+
+overflow:hidden;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+height:100vh;
+
+}
+
+body::before{
+
+content:"";
+
+position:absolute;
+
+width:250%;
+
+height:250%;
+
+background:
+
+radial-gradient(circle,#00c6ff22,transparent 40%),
+
+radial-gradient(circle,#7f5af022,transparent 40%),
+
+radial-gradient(circle,#00ffcc22,transparent 35%);
+
+animation:bgRotate 25s linear infinite;
+
+}
+
+@keyframes bgRotate{
+
+0%{
+
+transform:rotate(0deg);
+
+}
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+.wait-box{
+
+position:relative;
+
+z-index:5;
+
+width:500px;
+
+padding:40px;
+
+border-radius:25px;
+
+background:rgba(255,255,255,.08);
+
+backdrop-filter:blur(20px);
+
+text-align:center;
+
+color:white;
+
+box-shadow:0 20px 60px rgba(0,0,0,.35);
+
+}
+
+.loader{
+
+width:120px;
+
+height:120px;
+
+margin:auto;
+
+border-radius:50%;
+
+border:8px solid rgba(255,255,255,.08);
+
+border-top:8px solid #00c6ff;
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+h1{
+
+margin-top:25px;
+
+font-size:32px;
+
+}
+
+p{
+
+margin-top:20px;
+
+line-height:2;
+
+color:#ddd;
+
+}
+
+.request{
+
+margin-top:25px;
+
+padding:15px;
+
+background:rgba(255,255,255,.05);
+
+border-radius:12px;
+
+font-size:20px;
+
+font-weight:bold;
+
+}
+
+.buttons{
+
+margin-top:30px;
+
+display:flex;
+
+gap:15px;
+
+}
+
+button{
+
+flex:1;
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+font-size:16px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+}
+
+.refresh{
+
+background:#00c6ff;
+
+color:white;
+
+}
+
+.support{
+
+background:#1f2948;
+
+color:white;
+
+}
+
+.status{
+
+margin-top:25px;
+
+color:#00ff99;
+
+font-size:18px;
+
+font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="wait-box">
+
+<div class="loader"></div>
+
+<h1>
+
+طلبك قيد المراجعة
+
+</h1>
+
+<p>
+
+تم إرسال طلب إنشاء الحساب بنجاح.
+
+سيقوم فريق MHM بمراجعة بياناتك.
+
+بعد الموافقة سيتم إنشاء
+
+ID يبدأ بـ 54
+
+وكود دخول يبدأ بـ CC
+
+وستصلك إشعارات تلقائياً.
+
+</p>
+
+<div class="request">
+
+رقم الطلب :
+
+<span id="requestNumber">
+
+-----
+
+</span>
+
+</div>
+
+<div class="status"
+
+id="status">
+
+بانتظار الموافقة...
+
+</div>
+
+<div class="buttons">
+
+<button
+
+class="refresh"
+
+onclick="checkStatus()">
+
+<i class="fa-solid fa-rotate"></i>
+
+تحديث
+
+</button>
+
+<button
+
+class="support">
+
+<i class="fa-solid fa-headset"></i>
+
+الدعم
+
+</button>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import {
+
+initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+
+import {
+
+getDatabase,
+
+ref,
+
+get
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+const firebaseConfig={
+
+apiKey:"YOUR_API_KEY",
+
+authDomain:"cssc-4c83c.firebaseapp.com",
+
+databaseURL:"https://cssc-4c83c-default-rtdb.firebaseio.com",
+
+projectId:"cssc-4c83c",
+
+storageBucket:"cssc-4c83c.appspot.com",
+
+messagingSenderId:"YOUR_SENDER_ID",
+
+appId:"YOUR_APP_ID"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getDatabase(app);
+
+const params=new URLSearchParams(location.search);
+
+const request=params.get("request");
+
+document.getElementById("requestNumber").innerHTML=request;
+
+window.checkStatus=async()=>{
+
+const snap=await get(ref(db,"ApprovedRequests/"+request));
+
+if(snap.exists()){
+
+document.getElementById("status").innerHTML="✅ تمت الموافقة";
+
+setTimeout(()=>{
+
+location.href="login.html";
+
+},2000);
+
+}else{
+
+document.getElementById("status").innerHTML="⌛ لا يزال الطلب قيد المراجعة";
+
+}
+
+}
+
+setInterval(checkStatus,5000);
+
+</script>
+
+</body>
+
+</html>
