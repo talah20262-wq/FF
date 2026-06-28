@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MHM | لوحة المالك</title>
+
+<link rel="stylesheet" href="../assets/css/main.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Cairo,sans-serif;
+}
+
+body{
+
+background:#050816;
+
+display:flex;
+
+height:100vh;
+
+overflow:hidden;
+
+color:white;
+
+}
+
+/* ================= Sidebar ================= */
+
+.sidebar{
+
+width:290px;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(25px);
+
+border-left:1px solid rgba(255,255,255,.08);
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.logo{
+
+padding:30px;
+
+text-align:center;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logo h1{
+
+font-size:34px;
+
+color:#00c6ff;
+
+}
+
+.logo p{
+
+margin-top:8px;
+
+color:#ccc;
+
+}
+
+.menu{
+
+flex:1;
+
+padding:20px;
+
+overflow:auto;
+
+}
+
+.menu a{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:15px;
+
+margin-bottom:10px;
+
+text-decoration:none;
+
+color:white;
+
+border-radius:12px;
+
+transition:.3s;
+
+}
+
+.menu a:hover{
+
+background:#00c6ff;
+
+transform:translateX(-5px);
+
+}
+
+.menu i{
+
+font-size:20px;
+
+width:30px;
+
+text-align:center;
+
+}
+
+/* ================= Main ================= */
+
+.main{
+
+flex:1;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+/* ================= Topbar ================= */
+
+.topbar{
+
+height:80px;
+
+background:rgba(255,255,255,.05);
+
+backdrop-filter:blur(25px);
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+padding:0 30px;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.owner{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+}
+
+.owner img{
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+border:2px solid #00c6ff;
+
+}
+
+.actions{
+
+display:flex;
+
+gap:15px;
+
+}
+
+.actions button{
+
+padding:12px 18px;
+
+border:none;
+
+border-radius:12px;
+
+cursor:pointer;
+
+font-weight:bold;
+
+}
+
+.logout{
+
+background:#ff4d6d;
+
+color:white;
+
+}
+
+.notification{
+
+background:#00c6ff;
+
+color:white;
+
+}
+
+/* ================= Content ================= */
+
+.content{
+
+padding:30px;
+
+overflow:auto;
+
+height:calc(100vh - 80px);
+
+}
+
+.cards{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+gap:20px;
+
+}
+
+.card{
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.08);
+
+border-radius:20px;
+
+padding:25px;
+
+text-align:center;
+
+transition:.3s;
+
+}
+
+.card:hover{
+
+transform:translateY(-6px);
+
+box-shadow:0 15px 40px rgba(0,198,255,.25);
+
+}
+
+.card i{
+
+font-size:45px;
+
+margin-bottom:15px;
+
+color:#00c6ff;
+
+}
+
+.card h2{
+
+font-size:38px;
+
+margin-bottom:10px;
+
+}
+
+.card p{
+
+color:#ccc;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="logo">
+
+<h1>MHM</h1>
+
+<p>لوحة تحكم المالك</p>
+
+</div>
+
+<div class="menu">
+
+<a href="#">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<span>الرئيسية</span>
+
+</a>
+
+<a href="requests.html">
+
+<i class="fa-solid fa-user-clock"></i>
+
+<span>طلبات التسجيل</span>
+
+</a>
+
+<a href="users.html">
+
+<i class="fa-solid fa-users"></i>
+
+<span>المستخدمون</span>
+
+</a>
+
+<a href="#">
+
+<i class="fa-solid fa-building"></i>
+
+<span>الشركات</span>
+
+</a>
+
+<a href="#">
+
+<i class="fa-solid fa-industry"></i>
+
+<span>المصانع</span>
+
+</a>
+
+<a href="#">
+
+<i class="fa-solid fa-comments"></i>
+
+<span>المحادثات</span>
+
+</a>
+
+<a href="#">
+
+<i class="fa-solid fa-bullhorn"></i>
+
+<span>الإعلانات</span>
+
+</a>
+
+<a href="#">
+
+<i class="fa-solid fa-gear"></i>
+
+<span>الإعدادات</span>
+
+</a>
+
+</div>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="topbar">
+
+<div class="owner">
+
+<img src="../assets/images/admin.png">
+
+<div>
+
+<h3>مالك النظام</h3>
+
+<p>UID : pNLsBe8Y0ONS7oADXgj1z7gEMIg1</p>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="notification">
+
+<i class="fa-solid fa-bell"></i>
+
+الإشعارات
+
+</button>
+
+<button class="logout">
+
+تسجيل الخروج
+
+</button>
+
+</div>
+
+</div>
+
+<div class="content">
+
+<div class="cards">
+
+<div class="card">
+
+<i class="fa-solid fa-users"></i>
+
+<h2 id="usersCount">
+
+0
+
+</h2>
+
+<p>
+
+إجمالي المستخدمين
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-user-clock"></i>
+
+<h2 id="requestsCount">
+
+0
+
+</h2>
+
+<p>
+
+طلبات التسجيل
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-comments"></i>
+
+<h2 id="messagesCount">
+
+0
+
+</h2>
+
+<p>
+
+المحادثات
+
+</p>
+
+</div>
+
+<div class="card">
+
+<i class="fa-solid fa-building"></i>
+
+<h2 id="companiesCount">
+
+0
+
+</h2>
+
+<p>
+
+الشركات
+
+</p>
+
+</div>
+
+</div> <!-- ===========================
+طلبات التسجيل
+=========================== -->
+
+<div class="section">
+
+<h2 class="section-title">
+
+<i class="fa-solid fa-user-clock"></i>
+
+طلبات التسجيل الجديدة
+
+</h2>
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>الصورة</th>
+
+<th>الاسم</th>
+
+<th>المستخدم</th>
+
+<th>الهاتف</th>
+
+<th>النوع</th>
+
+<th>التاريخ</th>
+
+<th>الحالة</th>
+
+<th>الإجراءات</th>
+
+</tr>
+
+</thead>
+
+<tbody id="requestsTable">
+
+<tr>
+
+<td colspan="8">
+
+جارى تحميل الطلبات...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<!-- ===========================
+المستخدمون الجدد
+=========================== -->
+
+<div class="section">
+
+<h2 class="section-title">
+
+<i class="fa-solid fa-users"></i>
+
+آخر المستخدمين
+
+</h2>
+
+<table class="table">
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>الاسم</th>
+
+<th>البريد</th>
+
+<th>النوع</th>
+
+<th>الحالة</th>
+
+</tr>
+
+</thead>
+
+<tbody id="usersTable">
+
+<tr>
+
+<td colspan="5">
+
+جارى التحميل...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<style>
+
+.section{
+
+margin-top:40px;
+
+background:rgba(255,255,255,.05);
+
+padding:25px;
+
+border-radius:20px;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.section-title{
+
+margin-bottom:20px;
+
+font-size:25px;
+
+}
+
+.table{
+
+width:100%;
+
+border-collapse:collapse;
+
+}
+
+.table th{
+
+background:#00c6ff;
+
+padding:14px;
+
+}
+
+.table td{
+
+padding:14px;
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+text-align:center;
+
+}
+
+.table img{
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+}
+
+.accept{
+
+background:#00d084;
+
+color:white;
+
+padding:8px 15px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+margin:3px;
+
+}
+
+.reject{
+
+background:#ff4d6d;
+
+color:white;
+
+padding:8px 15px;
+
+border:none;
+
+border-radius:10px;
+
+cursor:pointer;
+
+margin:3px;
+
+}
+
+.accept:hover{
+
+transform:scale(1.05);
+
+}
+
+.reject:hover{
+
+transform:scale(1.05);
+
+}
+
+</style>
+
+<script type="module">
+
+import {initializeApp}
+
+from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+
+import {
+
+getDatabase,
+
+ref,
+
+onValue,
+
+set,
+
+remove
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/10.13.0/firebase-database.js";
+
+const firebaseConfig={
+
+apiKey:"YOUR_API_KEY",
+
+authDomain:"cssc-4c83c.firebaseapp.com",
+
+databaseURL:"https://cssc-4c83c-default-rtdb.firebaseio.com",
+
+projectId:"cssc-4c83c",
+
+storageBucket:"cssc-4c83c.appspot.com",
+
+messagingSenderId:"YOUR_SENDER_ID",
+
+appId:"YOUR_APP_ID"
+
+};
+
+const app=initializeApp(firebaseConfig);
+
+const db=getDatabase(app);
+
+/* ========= تحميل الطلبات ========= */
+
+onValue(ref(db,"Requests"),snapshot=>{
+
+let html="";
+
+let count=0;
+
+snapshot.forEach(item=>{
+
+count++;
+
+const d=item.val();
+
+html+=`
+
+<tr>
+
+<td>
+
+<img src="${d.avatar||'../assets/images/user.png'}">
+
+</td>
+
+<td>${d.fullName}</td>
+
+<td>${d.username}</td>
+
+<td>${d.phone}</td>
+
+<td>${d.accountType}</td>
+
+<td>${new Date(d.createdAt).toLocaleDateString()}</td>
+
+<td>${d.status}</td>
+
+<td>
+
+<button
+
+class="accept"
+
+onclick="approve('${item.key}')">
+
+قبول
+
+</button>
+
+<button
+
+class="reject"
+
+onclick="reject('${item.key}')">
+
+رفض
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+document.getElementById("requestsCount").innerHTML=count;
+
+document.getElementById("requestsTable").innerHTML=html;
+
+});
+
+</script> /* ===============================
+   إنشاء رقم مستخدم يبدأ بـ 54
+================================= */
+
+async function generateUserId() {
+
+    while (true) {
+
+        const id =
+            "54" +
+            Math.floor(
+                1000000 + Math.random() * 9000000
+            );
+
+        const snap = await get(ref(db, "Users/" + id));
+
+        if (!snap.exists()) {
+            return id;
+        }
+    }
+}
+
+/* ===============================
+   إنشاء Membership Code يبدأ بـ CC
+================================= */
+
+function generateMemberCode() {
+
+    const chars =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+
+    let code = "CC-";
+
+    for (let i = 0; i < 8; i++) {
+
+        code +=
+            chars[
+                Math.floor(Math.random() * chars.length)
+            ];
+
+        if (i === 3) code += "-";
+    }
+
+    return code;
+}
+
+/* ===============================
+   قبول الطلب
+================================= */
+
+window.approve = async function (uid) {
+
+    const requestSnap =
+        await get(ref(db, "Requests/" + uid));
+
+    if (!requestSnap.exists()) {
+
+        alert("الطلب غير موجود.");
+
+        return;
+    }
+
+    const request = requestSnap.val();
+
+    const userId = await generateUserId();
+
+    const memberCode = generateMemberCode();
+
+    await set(
+        ref(db, "Users/" + userId),
+        {
+
+            uid: uid,
+
+            userId: userId,
+
+            memberCode: memberCode,
+
+            fullName: request.fullName,
+
+            username: request.username,
+
+            email: request.email,
+
+            phone: request.phone,
+
+            accountType: request.accountType,
+
+            avatar: request.avatar || "",
+
+            status: "active",
+
+            verified: true,
+
+            createdAt: Date.now()
+
+        }
+    );
+
+    await set(
+        ref(db,
+            "Notifications/" + uid + "/approved"),
+        {
+
+            title: "تم قبول الحساب",
+
+            body:
+                "تمت الموافقة على حسابك ويمكنك تسجيل الدخول.",
+
+            memberCode: memberCode,
+
+            userId: userId,
+
+            createdAt: Date.now(),
+
+            read: false
+
+        }
+    );
+
+    await remove(ref(db, "Requests/" + uid));
+
+    alert(
+        "تم قبول المستخدم بنجاح.\n\n" +
+        "ID : " + userId +
+        "\nMembership : " + memberCode
+    );
+};
+
+/* ===============================
+   رفض الطلب
+================================= */
+
+window.reject = async function (uid) {
+
+    if (!confirm("هل تريد رفض هذا الطلب؟")) {
+        return;
+    }
+
+    await remove(ref(db, "Requests/" + uid));
+
+    alert("تم حذف الطلب.");
+};
+
+/* ===============================
+   تحميل عدد المستخدمين
+================================= */
+
+onValue(ref(db, "Users"), (snapshot) => {
+
+    let total = 0;
+
+    snapshot.forEach(() => total++);
+
+    document.getElementById("usersCount").textContent =
+        total;
+
+});
