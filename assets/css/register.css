@@ -1,0 +1,347 @@
+/* ===================================================
+   MHM Register Page
+=================================================== */
+
+.register-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+    position:relative;
+    overflow:hidden;
+}
+
+.register-page::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:
+    radial-gradient(circle at top left,#00c6ff33,transparent 40%),
+    radial-gradient(circle at bottom right,#7f5af033,transparent 40%);
+    animation:bgMove 18s linear infinite;
+}
+
+.register-page::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+    background-size:40px 40px;
+    opacity:.25;
+}
+
+.register-box{
+
+    width:100%;
+    max-width:720px;
+
+    position:relative;
+
+    z-index:5;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:24px;
+
+    padding:35px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+}
+
+.register-title{
+
+    text-align:center;
+
+    font-size:34px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+
+}
+
+.register-subtitle{
+
+    text-align:center;
+
+    color:#cfcfcf;
+
+    margin-bottom:35px;
+
+}
+
+.register-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+gap:20px;
+
+}
+
+.form-group{
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.form-group.full{
+
+grid-column:1/-1;
+
+}
+
+.form-group label{
+
+margin-bottom:8px;
+
+font-weight:700;
+
+color:#fff;
+
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+background:rgba(255,255,255,.08);
+
+border:1px solid rgba(255,255,255,.1);
+
+padding:15px;
+
+border-radius:14px;
+
+color:#fff;
+
+font-size:15px;
+
+transition:.3s;
+
+}
+
+.form-group textarea{
+
+resize:none;
+
+height:120px;
+
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+border-color:#00c6ff;
+
+box-shadow:0 0 25px rgba(0,198,255,.25);
+
+}
+
+.upload-box{
+
+border:2px dashed rgba(255,255,255,.18);
+
+padding:25px;
+
+border-radius:16px;
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.upload-box:hover{
+
+border-color:#00c6ff;
+
+background:rgba(255,255,255,.05);
+
+}
+
+.upload-box i{
+
+font-size:40px;
+
+margin-bottom:10px;
+
+color:#00c6ff;
+
+}
+
+.upload-preview{
+
+margin-top:15px;
+
+display:flex;
+
+justify-content:center;
+
+}
+
+.upload-preview img{
+
+width:120px;
+
+height:120px;
+
+border-radius:50%;
+
+object-fit:cover;
+
+border:3px solid #00c6ff;
+
+display:none;
+
+}
+
+.register-actions{
+
+margin-top:30px;
+
+display:flex;
+
+gap:15px;
+
+}
+
+.register-actions button{
+
+flex:1;
+
+padding:16px;
+
+font-size:18px;
+
+font-weight:bold;
+
+border:none;
+
+border-radius:15px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.btn-register{
+
+background:#00c6ff;
+
+color:white;
+
+}
+
+.btn-register:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 12px 30px rgba(0,198,255,.35);
+
+}
+
+.btn-reset{
+
+background:#232a45;
+
+color:white;
+
+}
+
+.btn-reset:hover{
+
+background:#2f395f;
+
+}
+
+.note{
+
+margin-top:25px;
+
+padding:18px;
+
+border-radius:14px;
+
+background:rgba(255,255,255,.05);
+
+border-left:5px solid #f4b400;
+
+color:#ddd;
+
+line-height:1.8;
+
+}
+
+@keyframes bgMove{
+
+0%{
+
+transform:scale(1) rotate(0deg);
+
+}
+
+50%{
+
+transform:scale(1.15) rotate(180deg);
+
+}
+
+100%{
+
+transform:scale(1) rotate(360deg);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.register-box{
+
+padding:20px;
+
+}
+
+.register-title{
+
+font-size:26px;
+
+}
+
+.register-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.register-actions{
+
+flex-direction:column;
+
+}
+
+.upload-preview img{
+
+width:90px;
+
+height:90px;
+
+}
+
+}
